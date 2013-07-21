@@ -9,8 +9,8 @@
 <?php
 
 	####################################################################
-	# Query database and display results as a pseudo XML file so
-	# it can used with AJAX; based on various examples from W3 Schools
+	# Query database to see if session is still valid
+	# done via Ajax/json response
 	####################################################################
 	
 	# Declare POST variables
@@ -53,14 +53,15 @@
 	}
 	
 	
-	// Output to pseudo HTML
-	echo "<xml>" . "\n";
-		echo "    <sessioninfo>" . "\n";
-		echo "        <status>" . htmlspecialchars($status) . "</status>" . "\n"; 
-		echo "        <message>" . htmlspecialchars($message) . "</message>" . "\n";
-		echo "    </sessioninfo>" . "\n";
-	echo "</xml>";
-
-	// $query->close();        
+	// Output to JSON
+	
+	$loginObj = new stdClass;
+	$loginObj->status = htmlspecialchars($status);
+	$loginObj->user = htmlspecialchars($userid);
+	$loginObj->sessID = htmlspecialchars($sessionID);
+	$loginObj->expiration = NULL;
+	$loginObj->message = htmlspecialchars($message);
+	
+  
 ?>
 
