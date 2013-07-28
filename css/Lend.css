@@ -1,0 +1,12 @@
+body {
+	padding-top : 70px;
+}
+
+.container {
+	padding-left : 2%;
+}
+@media (max-width: 767px) { 
+	.navbar-nav { 
+		padding-top : 30px;
+	}
+}

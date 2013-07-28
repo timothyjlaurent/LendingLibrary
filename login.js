@@ -28,15 +28,19 @@ function checkLogin() {
 
 	else {
 		// Otherwise dyanmically generate login form fields
-		$("#formfields").append("<label id=\"login\">user id</label><br>");
-		$("#formfields").append("<input type=\"text\" id=\"uid\" name=\"uid\" value=\"\" class=\"required\" minlength=\"5\" maxlength=\"20\"/><br>");
-		$("#formfields").append("<label id=\"login\">password</label><br>");
-		$("#formfields").append("<input type=\"password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required\" minlength=\"5\" maxlength=\"20\"/><br>");
-		$("#formfields").append("<input type=\"submit\" id=\"x\" value=\"Log In\" />");
-		
-		// Generate link to register
-		$("#welcome").append("<a href=\"register.php\">New user</a>");
-		
+		$("#formfields").append("<div class='form-group'><label for=\"uid\" class='col-lg-2 control-label' id=\"login\">user id</label><div class='col-lg-10'><input type=\"text\" placeholder=\"Enter ONID username\" id=\"uid\" name=\"uid\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/></div</div>");
+		// $("#formfields").append("<label for=\"uid\" class='col-lg-2 control-label' id=\"login\">user id</label>");
+		// $("#formfields").append("<div class='col-lg-10'>");
+		// $("#formfields").append("<input type=\"text\" placeholder=\"Enter ONID username\" id=\"uid\" name=\"uid\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/>");
+		// $("#formfields").append("</div></div>");
+		$("#formfields").append("<div class='form-group'><label for=\"pw\" class='col-lg-2 control-label' id=\"login\">password</label><div class='col-lg-10'><input type=\"password\" placeholder=\"Enter Password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/><br></div></div>");
+		// $("#formfields").append("<label for=\"pw\" class='col-lg-2 control-label' id=\"login\">password</label>");
+		// $("#formfields").append("<div class='col-lg-10'>");
+		// $("#formfields").append("<input type=\"password\" placeholder=\"Enter Password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/><br>");
+		// $("#formfields").append("</div></div>");
+		$("#formfields").append("<button type='submit' class='btn-large btn-default text-center' id=\"x\">Log In</button>");
+		//Generate link to register
+		// $("#welcome").append("<a href=\"register.php\">New user</a>");	
 		// Activate jquery form validate
 		$("#loginform").validate();
 
