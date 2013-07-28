@@ -38,7 +38,7 @@ function checkLogin() {
 		// $("#formfields").append("<div class='col-lg-10'>");
 		// $("#formfields").append("<input type=\"password\" placeholder=\"Enter Password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/><br>");
 		// $("#formfields").append("</div></div>");
-		$("#formfields").append("<button type='submit' class='btn-large btn-default text-center' id=\"x\">Log In</button>");
+		$("#formfields").append("<button type='submit' class='btn-large btn-default' id=\"x\">Log In</button>");
 		//Generate link to register
 		// $("#welcome").append("<a href=\"register.php\">New user</a>");	
 		// Activate jquery form validate
