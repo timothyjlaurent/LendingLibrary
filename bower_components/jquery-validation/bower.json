@@ -1,0 +1,22 @@
+{
+  "name": "jquery-validation",
+  "version": "1.11.2",
+  "main": "jquery.validate.js",
+  "scripts": [
+    "jquery.validate.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "gitHead": "6df748be74717b96910d5fd0c3914e29a73f9a64",
+  "readme": "[jQuery Validation Plugin](http://jqueryvalidation.org/) - Form validation made easy\n================================\n\n[![Build Status](https://secure.travis-ci.org/jzaefferer/jquery-validation.png)](http://travis-ci.org/jzaefferer/jquery-validation)\n\nThe jQuery Validation Plugin provides drop-in validation for your existing forms, while making all kinds of customizations to fit your application really easy.\n\n## [Help the project](http://pledgie.com/campaigns/18159)\n\n[![Help the project](http://www.pledgie.com/campaigns/18159.png?skin_name=chrome)](http://pledgie.com/campaigns/18159)\n\nThis project is looking for help! [You can donate to the ongoing pledgie campaign](http://pledgie.com/campaigns/18159)\nand help spread the word. If you've used the plugin, or plan to use, consider a donation - any amount will help.\n\nYou can find the plan for how to spend the money on the [pledgie page](http://pledgie.com/campaigns/18159).\n\n## Getting Started\n\nInclude jQuery and the plugin on a page. Then select a form to validate and call the `validate` method.\n\n```html\n<form>\n\t<input required>\n</form>\n<script src=\"jquery.js\"></script>\n<script src=\"jquery.validation.js\"></script>\n<script>\n$(\"form\").validate();\n</script>\n```\n\nFor more information on how to setup a rules and customizations, [check the documentation](http://docs.jquery.com/Plugins/Validation).\n\n## Reporting an Issue\n\n1. Make sure the problem you're addressing is reproducible.\n2. Use http://jsbin.com or http://jsfiddle.net to provide a test page.\n3. Indicate what browsers the isssue can be reproduced in.\n4. What version of the plug-in is the issue reproducable in. Is it reproducable after updating to the latest version.\n\n## Contributing\nFollow the [jQuery style guide](http://contribute.jquery.com/style-guides/js), even if existing code doesn't. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).\n\nIf you've wrote custom methods that you'd like to contribute to additional-methods.js, create a branch, add the method there and send a pull request for that branch.\n\n## License\nCopyright (c) 2013 Jörn Zaefferer\nLicensed under the MIT license.\n",
+  "readmeFilename": "README.md",
+  "_id": "jquery-validation@1.11.2",
+  "description": "[jQuery Validation Plugin](http://jqueryvalidation.org/) - Form validation made easy ================================",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/niftylettuce/jquery-validation.git"
+  }
+}

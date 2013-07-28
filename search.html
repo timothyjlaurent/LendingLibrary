@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Search: Lending Library</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/Lend.css" rel="stylesheet" >
+	<script src="jquery-1.9.1.min.js"></script>
+	<script src="jquery.validate.min.js"></script>
+	<script src="jquery.form.min.js"></script>
+	<script src="jquery.cookie.js"></script>
+	<script type="text/javascript" src="login.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" ></script>
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top navbar-inverse">
+	<div class="container">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand pull-left" href="#">Lending Library</a>
+ 		<div class="nav-collapse navbar-responsive-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Add Item</a></li>
+        <li><a href="#">Return Item</a></li>
+        <li><a href="#" id="logout" onclick="logout()">Logout</a></li>
+      </ul>
+    </div>
+	</div>	<!--/.container-->
+</div> 	<!-- /.navbar -->
+
+<div class="container">
+	<legend>Search for items</legend>
+	<form class="form-horizontal" id="searchform" method="post" action="search.php">
+		<fieldset>
+			<div class="form-group" id="searchfields">
+				<div class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="itemType">Item Type</label>
+				</div>
+				<div class="col-lg-10 col-sm-10 col-12">
+					<select id="typeoptions" class="form-control">
+						<option>Add some options here with Jquery</option>
+					</select>
+				</div>
+				<div class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="itemType">Checked Out</label>
+				</div>
+				<div class="col-lg-10 col-sm-10 col-12">
+					<select class="form-control">
+						<option>All</option>
+						<option>Available</option>
+						<option>Checked Out</option>
+					</select>
+				</div>
+				<div id="attrib1" class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="itemType">Attribute 1</label>
+				</div>
+				<div class="col-lg-10 col-sm-10 col-12">
+					<select id="attrib1opt" class="form-control">
+						<option>dummy 364MHz</option>
+						<option>dummy2 445MHz</option>
+						<option>dummy3 384MHz</option>
+					</select>
+				</div>
+				<div id="attrib2" class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="itemType">Attribute 2</label>
+				</div>
+				<div class="col-lg-10 col-sm-10 col-12">
+					<select id="attrib1opt" class="form-control">
+						<option>dummy 364MHz</option>
+						<option>dummy2 445MHz</option>
+						<option>dummy3 384MHz</option>
+					</select>
+				</div>		
+				<div id="attrib3" class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="itemType">Attribute 2</label>
+				</div>
+				<div class="col-lg-10 col-sm-10 col-12">
+					<select id="attrib1opt" class="form-control">
+						<option>dummy 364MHz</option>
+						<option>dummy2 445MHz</option>
+						<option>dummy3 384MHz</option>
+					</select>
+				</div>
+				<div class="col-lg-2 col-sm-2 col-12 control-label">
+					<label for="keyword">Keyword</label>
+				</div>				
+				<div class="col-lg-10 col-sm-10 col-12">
+					<input type="text" class="form-control" placeholder="Search for Keyword">
+				</div>
+				<div class='col-12 '>
+					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Show Results</button>
+				</div>
+			</div>
+		</fieldset>
+</div>
+
+</body>
+</html>
