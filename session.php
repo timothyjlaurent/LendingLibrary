@@ -2,10 +2,6 @@
 	// Connect to mysql
 	include 'sqlconnect.php'; 
 ?>
-
-
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">-->
-
 <?php
 
 	####################################################################
@@ -44,7 +40,7 @@
 	$query->fetch();
 	
 	if ($status != 0) {
-		$message = "Session has expired, please log in ***";
+		$message = "Session has expired, please log in";
 		$status = -1;
 	}
 	else {
@@ -57,11 +53,16 @@
 	
 	$loginObj = new stdClass;
 	$loginObj->status = htmlspecialchars($status);
-	$loginObj->user = htmlspecialchars($userid);
-	$loginObj->sessID = htmlspecialchars($sessionID);
+	$loginObj->user = htmlspecialchars($userID);
+	$loginObj->sessID = htmlspecialchars($sessID);
 	$loginObj->expiration = NULL;
 	$loginObj->message = htmlspecialchars($message);
 	
+	// Encode in JSON
+	// header('Content-Type: application/json');
+	echo json_encode($loginObj);
+	
+	exit;
   
 ?>
 
