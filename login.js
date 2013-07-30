@@ -28,34 +28,15 @@ function checkLogin() {
 	}
 
 	else {
-<<<<<<< HEAD
-		// Otherwise dyanmically generate login form fields
-		$("#formfields").append("<div class='form-group'><label for=\"uid\" class='col-lg-2 control-label' id=\"login\">user id</label><div class='col-lg-10'><input type=\"text\" placeholder=\"Enter ONID username\" id=\"uid\" name=\"uid\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/></div</div>");
-		// $("#formfields").append("<label for=\"uid\" class='col-lg-2 control-label' id=\"login\">user id</label>");
-		// $("#formfields").append("<div class='col-lg-10'>");
-		// $("#formfields").append("<input type=\"text\" placeholder=\"Enter ONID username\" id=\"uid\" name=\"uid\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/>");
-		// $("#formfields").append("</div></div>");
-		$("#formfields").append("<div class='form-group'><label for=\"pw\" class='col-lg-2 control-label' id=\"login\">password</label><div class='col-lg-10'><input type=\"password\" placeholder=\"Enter Password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/><br></div></div>");
-		// $("#formfields").append("<label for=\"pw\" class='col-lg-2 control-label' id=\"login\">password</label>");
-		// $("#formfields").append("<div class='col-lg-10'>");
-		// $("#formfields").append("<input type=\"password\" placeholder=\"Enter Password\" id=\"pw\" name=\"pw\" value=\"\" class=\"required form-control\" minlength=\"5\" maxlength=\"20\"/><br>");
-		// $("#formfields").append("</div></div>");
-		$("#formfields").append("<button type='submit' class='btn-large btn-default' id=\"x\">Log In</button>");
-		//Generate link to register
-		// $("#welcome").append("<a href=\"register.php\">New user</a>");	
-=======
+
 		// Otherwise dyanmically generate CAS login form
 		// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
 		var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
 		
-		$("#formfields").append("OSU Users<br>");
-		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" />");
-		$("#formfields").append("<input type=\"submit\" id=\"x\" value=\"Log In\" />");
+		$("#formfields").append("<div class='form-group'><div class='col-lg-4 col-4 lead'>OSU Users</div><div class='col-lg-4 col-4'><input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">Log In</button></div></div>");
 
-		// Generate link to register
-		$("#welcome").append("<a href=\"register.php\">New user</a>");
 		
->>>>>>> Added CAS login
+
 		// Activate jquery form validate
 		$("#loginform").validate();
 
