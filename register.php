@@ -15,9 +15,6 @@
 	$password = $_POST['pw'];
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
-	$currWgt = $_POST['currWgt'];
-	$tarWgt = $_POST['tarWgt'];
-	$coachName = $_POST['coachName'];
 	
 	unset($_POST);
 	
@@ -34,18 +31,13 @@
 	$pwSafe = $mysqli->real_escape_string($password);
 	$fnSafe = $mysqli->real_escape_string($fname);
 	$lnSafe = $mysqli->real_escape_string($lname);
-	$cwSafe = $mysqli->real_escape_string($currWgt);
-	$twSafe = $mysqli->real_escape_string($tarWgt);
-	$cnSafe = $mysqli->real_escape_string($coachName);
 	
 	// Validate data before sending to sql
 	
 	$message = null; // field to track error messages
 	
 	if(empty($uidSafe) || empty($pwSafe) 
-		|| empty($fnSafe) || empty($lnSafe)
-		|| empty($cwSafe) || empty($twSafe)
-		|| empty($cnSafe)) {
+		|| empty($fnSafe) || empty($lnSafe)) {
 		setRegCookie(-1, "All fields are required");
 	}
 
@@ -61,15 +53,6 @@
 	if (!preg_match('/^[a-zA-Z- ]{2,50}$/i', $fnSafe)
 		|| !preg_match('/^[a-zA-Z- ]{2,50}$/i', $lnSafe)) {
 		setRegCookie(-1, "First/last name can only contain 2-50 letters");
-	}
-	
-	// Check weight values to make sure they are reasonable
-	if (intval($cwSafe) < 0 || intval($twSafe) < 0) {
-		setRegCookie(-1, "Weights can not be negative");
-	}
-	
-	if (intval($cwSafe) < intval($twSafe)) {
-		setRegCookie(-1, "Target weight can not be higher than current weight");
 	}
 	
 	// ####################################################################
