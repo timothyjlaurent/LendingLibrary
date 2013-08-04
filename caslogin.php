@@ -8,7 +8,7 @@
 	
 	// Create validation URL
 	// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
-	$serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
+	$serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
 	$validateURL = "https://login.oregonstate.edu/cas/serviceValidate?ticket=" . $ticket . "&service=" . $serviceURL;
 	
 ?>

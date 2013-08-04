@@ -34,9 +34,9 @@
 	
 	// Add record to sesson table: user, sessionID and expiration date (10 minutes)
 	// MD5 from: http://www.thingy-ma-jig.co.uk/blog/10-07-2008/generate-random-string-mysql
-	if (!($add = $mysqli->query("UPDATE session_md SET expires = 
-			(SELECT DATE_ADD(NOW(), INTERVAL 10 MINUTE)) WHERE user = 
-			'$uidSafe' and sessionID = '$sidSafe'"))) {
+	if (!($add = $mysqli->query("UPDATE session SET expires = 
+			(SELECT DATE_ADD(NOW(), INTERVAL 10 MINUTE)) WHERE userid = 
+			'$uidSafe' and sessionid = '$sidSafe'"))) {
 		$message =  "Unable to refresh session 2"; 
 		$status = -1;
 	}

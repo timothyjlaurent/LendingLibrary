@@ -20,7 +20,7 @@
 	# Make sure user exists on our DB
 	####################################################################
 
-	if (!($query = $mysqli->prepare("SELECT COUNT(user) FROM userdb WHERE user = '$uidSafe'"))) {
+	if (!($query = $mysqli->prepare("SELECT COUNT(userid) FROM userdb WHERE userid = '$uidSafe'"))) {
 		outputJSON(-1, null, null, null, "Unable to prepare database");
 	}
 
@@ -43,13 +43,13 @@
 	####################################################################
 	
 	// First delete any prior sessions for the user
-	if(!($delete = $mysqli->query("DELETE from session_md WHERE user = '$uidSafe'"))) {
+	if(!($delete = $mysqli->query("DELETE from session WHERE userid = '$uidSafe'"))) {
 		outputJSON(-1, null, null, null, "Unable to delete prior session info from database");
 	}
 	
 	// Add record to sesson table: user, sessionID and expiration date (10 minutes)
 	// MD5 from: http://www.thingy-ma-jig.co.uk/blog/10-07-2008/generate-random-string-mysql
-	if (!($add = $mysqli->query("INSERT INTO session_md VALUES ('$uidSafe', 
+	if (!($add = $mysqli->query("INSERT INTO session VALUES ('$uidSafe', 
 			(SELECT SUBSTRING(MD5(RAND()) FROM 1 FOR 20)), 
 			(SELECT DATE_ADD(NOW(), INTERVAL 10 MINUTE)))"))) {
 		outputJSON(-1, null, null, null, "Unable to create session");
@@ -59,7 +59,7 @@
 	// # Retrieve session id to store in cookie
 	// ####################################################################
 	
-	if (!($session = $mysqli->prepare("SELECT sessionID, expires FROM session_md WHERE user = '$uidSafe'"))) {
+	if (!($session = $mysqli->prepare("SELECT sessionID, expires FROM session WHERE userid = '$uidSafe'"))) {
 		outputJSON(-1, null, null, null, "Unable to prepare database");
 	}
 

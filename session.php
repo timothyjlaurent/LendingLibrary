@@ -23,7 +23,7 @@
 
 	// Check expiration of session cookie on server
 	if (!($query = $mysqli->prepare("select case when TIME_TO_SEC((select expires 
-			from session_md where user = '$uidSafe' and sessionID = '$sidSafe')) 
+			from session where userid = '$uidSafe' and sessionid = '$sidSafe')) 
 			> TIME_TO_SEC(CURRENT_TIMESTAMP) then 0 else -1 end"))) {
 		$message =  "Unable to prepare database"; 
 		$status = -1;

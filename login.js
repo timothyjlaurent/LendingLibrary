@@ -23,19 +23,16 @@ function checkLogin() {
 	// Check session again after verifying and welcome if logged in
 	if (loginStat && loginStat == 0) {
 		// Generate login message and log-out button
-		$("#welcome").append(userName + " logged in");
-		$("#formfields").append("<br><button type=\"button\" id=\"x\" onclick=\"logout()\">Log out</button>");
+		$("#formfields").append("<button type=\"button\" class='btn btn-default btn-block' id=\"x\" onclick=\"logout()\">Log out</button>");
 	}
 
 	else {
 
 		// Otherwise dyanmically generate CAS login form
 		// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
-		var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
+		var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
 		
-		$("#formfields").append("<div class='form-group'><div class='col-lg-4 col-4 lead'>OSU Users</div><div class='col-lg-4 col-4'><input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">Log In</button></div></div>");
-
-		
+		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
 
 		// Activate jquery form validate
 		$("#loginform").validate();
@@ -104,32 +101,7 @@ function errorSession(data, status) {
 	$.cookie('userMsg', "error creating session", { path: '/'});
 }
 
-		
-// // Callback function for ajax login form
-// function updateCookie(responseText, statusText, xhr, $form) {
-	// // Convert JSON text response from form to javascript object
-	// var loginObj = eval("(" + responseText + ")");
-	
-	// // Set cookie with login information
-	// $.cookie('sessStat', loginObj.status, { path: '/'});
-	// $.cookie('sessUser', loginObj.user, { path: '/'});
-	// $.cookie('sessID', loginObj.sessID, { path: '/'});
-	// $.cookie('sessExp', loginObj.expiration, { path: '/'});
-	
-	// // Update login box and message
-	// if (loginObj.status != null && loginObj.status == 0) {
-		// $("#welcome").empty();
-		// $("#welcome").append(loginObj.user + " logged in");
-		// $("#formfields").empty();
-		// $("#formfields").append("<br><button type=\"button\" id=\"x\" onclick=\"logout()\">Log out</button>");
-	// }
-	
-	// // Display any messages
-	// if (loginObj.message != null && loginObj.message != "You are now logged in" ) {
-		// $("#usermsg").append(loginObj.message);
-	// }
-	
-// }
+
 
 // Retrieves messages stored in cookie and display in
 // message area
@@ -154,19 +126,17 @@ function logout() {
 	$.cookie('sessExp', null, { path: '/'});
 	
 	$("#formfields").empty();
-	$("#welcome").empty();
+	$("#usermsg").empty();
 	
 	
 	// regenerate login form fields
 	// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
 	var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
 	
-	$("#formfields").append("OSU Users<br>");
-	$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" />");
-	$("#formfields").append("<input type=\"submit\" id=\"x\" value=\"Log In\" />");
+	$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
 	
-	// Generate link to register
-	$("#welcome").append("<a href=\"register.php\">New user</a>");
+	// Alert user
+	$("#usermsg").append("You are logged out");
 	
 	// Activate jquery form validate
 	$("#loginform").validate();
@@ -187,7 +157,6 @@ function checkSession(userName, loginSess) {
 }
 
 function updateSession(data, status) {
-	// Convert JSON text response from form to javascript object
 	
 	// Set cookie with login information
 	$.cookie('sessStat', data.status, { path: '/'});
@@ -201,7 +170,7 @@ function updateSession(data, status) {
 	}
 	// Otherwise, update session expiration on server
 	else {
-		$.post("refresh.php", { userName: userName, loginSess: loginSess });
+		$.post("refresh.php", { userName: data.user, loginSess: data.sessID });
 	}
 
 }
