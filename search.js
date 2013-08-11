@@ -41,6 +41,7 @@
  
  // Takes JSON returned from AJAX to populate item type menu
  function createItemMenu(data, status) {
+	alert("success");
 	var i;
 	for (i = 0; i < data.length; i++) {
 		$("#typeoptions").append("<option value=\"" + data[i] + "\">" + data[i] + "</option>");
@@ -67,12 +68,9 @@
 		isNumber[data[i].field] = data[i].numeric;
 		
 		// Add options to 3 attribute menus
-		$("#attrib1opt").append("<option value=\"" + data[i].field + "\">" 
-				+ data[i].field + "</option>");
-		$("#attrib2opt").append("<option value=\"" + data[i].field + "\">" 
-				+ data[i].field + "</option>");
-		$("#attrib3opt").append("<option value=\"" + data[i].field + "\">" 
-				+ data[i].field + "</option>");
+		$("#attrib1opt").append("<option value=\"" + data[i].field + "\">" +data[i].field + "</option>");
+		$("#attrib2opt").append("<option value=\"" + data[i].field + "\">" + data[i].field + "</option>");
+		$("#attrib3opt").append("<option value=\"" + data[i].field + "\">" + data[i].field + "</option>");
 	}
 	
 	// Listen to see if any of the 3 menus are selected
