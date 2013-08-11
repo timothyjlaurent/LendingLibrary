@@ -1,7 +1,7 @@
 <?php
 	// Connect to mysql
 	// include 'sqlconnect.php'; 
-	include '../connect.php';
+	include "sqlconnect.php';
 ?>
 
 
