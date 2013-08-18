@@ -57,79 +57,29 @@
 	<form class="form-horizontal" id="searchform" method="get" action="search.php">
 		<fieldset>
 			<div class="form-group" id="searchfields">
-				<div class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="itemType">Item Type</label>
+				<div id="staticfields">
+					<div class="col-lg-2 col-sm-2 col-12 control-label">
+						<label for="itemType">Item Type</label>
+					</div>
+					<div class="col-lg-10 col-sm-10 col-12">
+						<select id="typeoptions" name="typeoptions" class="form-control">
+							<option value="">Choose</option>
+						</select>
+					</div>
+					<div class="col-lg-2 col-sm-2 col-12 control-label">
+						<label for="itemType">Checked Out</label>
+					</div>
+					<div class="col-lg-10 col-sm-10 col-12">
+						<select id="checkout" name="checkout" class="form-control">
+							<!-- **** VALUES ARE PLACEHOLDERS FOR SEARCH *** -->
+							<option value="1">All</option>
+							<option value="2">Available</option>
+							<option value="3">Checked Out</option>
+						</select>
+					</div>
 				</div>
-				<div class="col-lg-10 col-sm-10 col-12">
-					<select id="typeoptions" name="typeoptions" class="form-control">
-						<option value="">Choose</option>
-					</select>
-				</div>
-				<div class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="itemType">Checked Out</label>
-				</div>
-				<div class="col-lg-10 col-sm-10 col-12">
-					<select id="checkout" name="checkout" class="form-control">
-						<!-- **** VALUES ARE PLACEHOLDERS FOR SEARCH *** -->
-						<option value="1">All</option>
-						<option value="2">Available</option>
-						<option value="3">Checked Out</option>
-					</select>
-				</div>
-
-				<div id="attrib1" class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="itemType">Attribute 1</label>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<select id="attrib1opt" name="attrib1opt" class="form-control">
-						<option value="">choose</option>
-					</select>
-				</div>
-				<div class="col-lg-2 col-sm-2 col-12">
-					<select id="attrib1comp" name="attrib1comp" class="form-control">
-					</select>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<input id="attrib1input" name="attrib1input" class="form-control">
-				</div>
-
-				<div id="attrib2" class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="itemType">Attribute 2</label>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<select id="attrib2opt" name="attrib2opt" class="form-control">
-						<option value="">choose</option>
-					</select>
-				</div>		
-				<div class="col-lg-2 col-sm-2 col-12">
-					<select id="attrib2comp" name="attrib2comp" class="form-control">
-					</select>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<input id="attrib2input" name="attrib2input" class="form-control">
-				</div>
-
-				<div id="attrib3" class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="itemType">Attribute 3</label>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<select id="attrib3opt" name="attrib3opt" class="form-control">
-						<option value="">choose</option>
-					</select>
-				</div>
-				<div class="col-lg-2 col-sm-2 col-12">
-					<select id="attrib3comp" name="attrib3comp" class="form-control">
-					</select>
-				</div>
-				<div class="col-lg-4 col-sm-4 col-12">
-					<input id="attrib3input" name="attrib3input" class="form-control">
-				</div>
-				
-				<div class="col-lg-2 col-sm-2 col-12 control-label">
-					<label for="keyword">Keyword</label>
-				</div>				
-				<div class="col-lg-10 col-sm-10 col-12">
-					<input id="searchterm" name="searchterm" type="text" class="form-control" placeholder="Search for Keyword">
+			
+				<div id="typefields">
 				</div>
 				<div class='col-12 '>
 					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Show Results</button>

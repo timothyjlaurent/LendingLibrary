@@ -7,8 +7,6 @@
 	$type = $mysqli->real_escape_string($_GET['type']);
 	// echo $type;
 
-
-	
 	// ####################################################################
 	// # Query itemTypes table to list of item types
 	// ####################################################################
@@ -32,14 +30,12 @@
 	
 	// Write records retrieved from DB
 	while($query->fetch()){
-		
 		// Write each element to array
 		$attribute = array(
 			"field" => htmlspecialchars($field),
 			"units" => htmlspecialchars($units),
 			"numeric" => htmlspecialchars($isnumber)
 		);
-	
 		array_push($menu, $attribute);
 	}
 	
@@ -49,12 +45,12 @@
 	echo json_encode($menu);
 	exit;
 	
-	
 	// ####################################################################
 	// # function for database query error situatons
 	// ####################################################################
 	
 	function queryError() {
+		alert('error');
 		$menu = array();
 		array_push($menu, null);
 		header('Content-Type: application/json');
