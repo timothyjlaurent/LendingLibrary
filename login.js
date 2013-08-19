@@ -31,8 +31,10 @@ function checkLogin() {
 		// Otherwise dyanmically generate CAS login form
 		// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
 		var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
+		var returnURL = "?return=" + window.location.href;
 		
-		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
+		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + returnURL
+			+ "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
 
 		// Activate jquery form validate
 		$("#loginform").validate();
@@ -47,6 +49,7 @@ function checkCASLogin(data) {
 	var user;
 	var failMsg;
 	try {
+		// Read user and message from JSON
 		user = data.query.results.serviceResponse.authenticationSuccess.user;
 		failMsg = data.query.results.serviceResponse.authenticationFailure;
 	}
@@ -64,11 +67,13 @@ function checkCASLogin(data) {
 		// Record fail message to cookie for later retrieval
 		$.cookie('userMsg', failMsg, { path: '/'});
 
-		// Redirect back to home page
-		window.location.href = "index.html";
+		// Redirect back to original page
+		var searchURL = getUrlVars()["return"];
+		window.location.href = searchURL;
 	}
 	// If ticket does validate, then post Ajax form to create new session
 	else {
+		// user = $.cookie('sessUser');
 		$.ajax({url: "login.php",
 			type: "POST",
 			dataType: "json",
@@ -91,9 +96,10 @@ function createSession(data, status) {
 	if (data.status && data.status != 0) {
 		logout();
 	}
-	
-	// Redirect back to home page
-	window.location.href = "index.html";
+
+	// Redirect back to original page
+	var searchURL = getUrlVars()["return"];
+	window.location.href = searchURL;
 }
 
 // Callback function on ajax post to create new session
@@ -128,18 +134,21 @@ function logout() {
 	$("#formfields").empty();
 	$("#usermsg").empty();
 	
+	location.reload();
 	
-	// regenerate login form fields
-	// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
-	var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
+	// // regenerate login form fields
+	// // **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
+	// var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/login/caslogin.php";
+	// var returnURL = "?return=" + window.location.href;
+
+	// $("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + returnURL
+		// + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
 	
-	$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
+	// // Alert user
+	// $("#usermsg").append("You are logged out");
 	
-	// Alert user
-	$("#usermsg").append("You are logged out");
-	
-	// Activate jquery form validate
-	$("#loginform").validate();
+	// // Activate jquery form validate
+	// $("#loginform").validate();
 	
 }
 
@@ -181,3 +190,12 @@ function errorSession(data, info) {
     $("#usermsg").append("session update error occurred");
 }
 
+// Function to parse data from get parameters in URL
+// http://papermashup.com/read-url-get-variables-withjavascript/
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}

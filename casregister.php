@@ -8,7 +8,7 @@
 	
 	// Create validation URL
 	// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
-	$serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
+	$serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/casregister.php";
 	$returnURL = $_GET['return'];
 	// echo $returnURL;
 	$validateURL = "https://login.oregonstate.edu/cas/serviceValidate?ticket=" . $ticket . "&service=" 
@@ -21,7 +21,7 @@
 	<script src="jquery.validate.min.js"></script>
 	<script src="jquery.form.min.js"></script>
 	<script src="jquery.cookie.js"></script>
-	<script type="text/javascript" src="login.js"></script>
+	<script type="text/javascript" src="register.js"></script>
 	<script>
 		$(document).ready(function() {
 			// Use Ajax to validate CAS ticket #
@@ -37,7 +37,7 @@
 					q: "select * from xml where url='" + url + "'",
 					format: "json"
 				},
-				success: checkCASLogin
+				success: checkCASRegister
 			});
 		});
 		
