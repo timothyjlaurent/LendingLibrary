@@ -11,9 +11,14 @@
 	// # Query itemTypes table to list of item types
 	// ####################################################################
 
-	if (!($query = $mysqli->prepare("select field, units, 
-			isnumber from itemTypes where searchable = '1' 
-			and type = '$type'"))) {
+	$query = "select field, units, 
+			isnumber, required from itemTypes where ";
+	if ($_GET['search']==1){
+		$query .= "searchable = '1' and ";
+	}		
+	$query .= "type = '$type'";
+
+	if (!($query = $mysqli->prepare($query))) {
 		queryError();
 	}
 	
@@ -21,7 +26,7 @@
 		queryError();
 	}
 
-	if(!($query->bind_result($field, $units, $isnumber))) {
+	if(!($query->bind_result($field, $units, $isnumber, $required))) {
 		queryError();
 	}
 
@@ -34,7 +39,8 @@
 		$attribute = array(
 			"field" => htmlspecialchars($field),
 			"units" => htmlspecialchars($units),
-			"numeric" => htmlspecialchars($isnumber)
+			"numeric" => htmlspecialchars($isnumber),
+			"required" => htmlspecialchars($required)
 		);
 		array_push($menu, $attribute);
 	}

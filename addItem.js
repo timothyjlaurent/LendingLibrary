@@ -3,12 +3,10 @@
  */
  
  
- function getSearchOptions() {
+ function getAddOptions() {
 	// Activate jquery form validate
-	$("#searchform").validate();
-
-	console.log("in getSearchOptions");
-
+	$("#addform").validate();
+	console.log("in getSearchOptions_ debug test");
 	// Call Ajax to retrieve list of item types
 	$.ajax({url: "itemtype.php",
 		type: "GET",
@@ -30,7 +28,7 @@
 			type: "GET",
 			dataType: "json",
 			data: { type: $("#typeoptions").val(),
-					search: 1  },
+					search: 0 },
 			success: createAttributes,
 			error: errorQuery});
 	});
@@ -49,7 +47,6 @@
  
  // Prints error message if AJAX call fail
  function errorQuery() {
-		console.log("CreateItem AJAX Success");
 		$("#usermsg").append("Unable to access database");
  }
  
@@ -72,20 +69,20 @@
 		console.log(contID);
 		$('#typefields').append('<div class="container" id="'+contID+'">');
 		$('#'+contID).append('<div id="'+fldname+'" class="col-lg-2 col-sm-2 col-12 control-label">');
+		
 		$('#'+fldname).append('<label>'+data[i].field.replace(/[-_]/g," ")+'</label>');
-		if (data[i].numeric == 1){
-			$('#'+contID).append('<div class="col-lg-2 col-sm-2 col-12"><select name="comp-'+data[i].field+'" class="form-control"><option value="gt">&gt</option><option value="eq">=</option><option value="lt">&lt</option>');
-		} else {
-			// hides the div when screen is small
-			$('#'+contID).append('<div class="col-lg-2 col-sm-2 col-12 hidden-xs">');
-		}
+		
+		$('#'+contID).append('<div class="col-lg-2 col-sm-2 col-12 hidden-xs">');
+		
 		$('#'+contID).append('<div class="col-lg-8 col-sm-8 col-12"><input type="text" placeholder="'+data[i].units+'" id="'+valname+'" name="'+valname+'" class="form-control"></input>');
+		if (data[i].required == 1 ){
+			$('#'+valname).addClass("required");
+		}
 		if (data[i].numeric == 1 ){
 			$('#'+valname).addClass("number");
 		}
-
 	}
 
 }
 
-
+		// <option value="3">Checked Out</option>

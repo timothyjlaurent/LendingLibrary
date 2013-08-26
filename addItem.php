@@ -1,7 +1,11 @@
+<?php
+	// Connect to mysql
+	include 'sqlconnect.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Search: Lending Library</title>
+	<title>Add Item: Lending Library</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="css/Lend.css" rel="stylesheet" >
@@ -10,18 +14,13 @@
 	<script src="jquery.form.min.js"></script>
 	<script src="jquery.cookie.js"></script>
 	<script type="text/javascript" src="login.js"></script>
-	<script type="text/javascript" src="search.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" ></script>
+	<script type="text/javascript" src="checkinout.js"></script>
 	<script>
-		// **** DOES THIS PAGE REQUIRE LOGIN ???? *****
 		$(document).ready(checkLogin);
 		$(document).ready(checkMessages);
-		$(document).ready(getSearchOptions);
 	</script>
 </head>
-
 <body>
-
 
 <div class="navbar navbar-fixed-top navbar-inverse">
 		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-responsive-collapse">
@@ -47,48 +46,59 @@
       </ul>
     </div>
 </div> 	<!-- /.navbar -->
-
 <!-- start content - display user messages -->
 <div id="usermsg">
 </div>
+<?php
 
-<div class="container">
-	<legend>Search for items</legend>
-	<form class="form-horizontal" id="searchform" method="get" action="search.php">
-		<fieldset>
-			<div class="form-group" id="searchfields">
+	// Declare form GET variables
+	$type = $_GET['typeoptions'];
+	
+	$schParams = array();
 
-				<div class="container">
-				<div id="staticfields">
-					<div class="col-lg-2 col-sm-2 col-12 control-label">
-						<label for="itemType">Item Type</label>
-					</div>
-					<div class="col-lg-10 col-sm-10 col-12">
-						<select id="typeoptions" name="typeoptions" class="form-control">
-							<option value="">Choose</option>
-						</select>
-					</div>
-					<div class="col-lg-2 col-sm-2 col-12 control-label">
-						<label for="itemType">Checked Out</label>
-					</div>
-					<div class="col-lg-10 col-sm-10 col-12">
-						<select id="available" name="available" class="form-control">
-							<!-- **** VALUES ARE PLACEHOLDERS FOR SEARCH *** -->
-							<option value="all">All</option>
-							<option value="1">Available</option>
-							<option value="0">Checked Out</option>
-						</select>
-					</div>
-				</div>
-				</div>
-				<div id="typefields">
-				</div>
-				<div class='col-12 '>
-					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Show Results</button>
-				</div>
-			</div>
-		</fieldset>
-</div>
+	foreach ( $_GET as $key => $value){
+		if (!empty($value)){
+			if (preg_match("/val-(.+)$/", $key, $matches)){
+				$schParams[$matches[1]] = $value;
+			} 
+		}
+	}
+	$ids = array();
 
-</body>
-</html>
+	$query = "insert into items (`type`,`available`) values ('$type', 1)";
+	echo $query;
+	if(!($query = $mysqli->prepare($query))){
+		echo "<br>".$mysqli->error;	
+		queryError();
+	}
+	if(!($query->execute())){
+		echo "<br>".$mysqli->error;	
+		queryError();
+	}
+	$id = $mysqli->insert_id;
+	echo $id;
+
+	include 'itemTypeMaps.php';
+	print_r ($typeMap);
+	echo "<br>type $type<br>";
+	foreach ( $schParams as $key => $val){
+		if ( $typeMap[$type][$key] != 0 || $typeMap[$type][$key] != "NULL"){
+			$query = "insert into itemDesc (`itemID`,`field`, `units`, `numValue`) values ($id,'$key','".$typeMap[$type][$key]."',$val)";
+			echo "<br>query $query<br>";
+		} else {
+			$query = "insert into itemDesc (`itemID`,`field`, `strValue`) values ($id,'$key' ,'$val')";
+			echo "<br>query $query<br>";
+		}
+		if(!($query = $mysqli->prepare($query))){
+			echo "<br>".$mysqli->error;	
+		}
+		// echo "<br>query ".$query."<br>";
+		if(!($query->execute())){
+			queryError();
+		}
+	}
+
+	function queryError() {
+		echo "Sorry there is an error, try again later <br>";
+		exit;	}
+?>

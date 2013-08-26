@@ -1,3 +1,5 @@
+<!-- Lending Library add item -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +12,13 @@
 	<script src="jquery.form.min.js"></script>
 	<script src="jquery.cookie.js"></script>
 	<script type="text/javascript" src="login.js"></script>
-	<script type="text/javascript" src="search.js"></script>
+	<script type="text/javascript" src="addItem.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript" ></script>
 	<script>
 		// **** DOES THIS PAGE REQUIRE LOGIN ???? *****
 		$(document).ready(checkLogin);
 		$(document).ready(checkMessages);
-		$(document).ready(getSearchOptions);
+		$(document).ready(getAddOptions);
 	</script>
 </head>
 
@@ -53,11 +55,10 @@
 </div>
 
 <div class="container">
-	<legend>Search for items</legend>
-	<form class="form-horizontal" id="searchform" method="get" action="search.php">
+	<legend>Add New Item</legend>
+	<form class="form-horizontal" id="addform" method="get" action="addItem.php">
 		<fieldset>
 			<div class="form-group" id="searchfields">
-
 				<div class="container">
 				<div id="staticfields">
 					<div class="col-lg-2 col-sm-2 col-12 control-label">
@@ -67,24 +68,13 @@
 						<select id="typeoptions" name="typeoptions" class="form-control">
 							<option value="">Choose</option>
 						</select>
-					</div>
-					<div class="col-lg-2 col-sm-2 col-12 control-label">
-						<label for="itemType">Checked Out</label>
-					</div>
-					<div class="col-lg-10 col-sm-10 col-12">
-						<select id="available" name="available" class="form-control">
-							<!-- **** VALUES ARE PLACEHOLDERS FOR SEARCH *** -->
-							<option value="all">All</option>
-							<option value="1">Available</option>
-							<option value="0">Checked Out</option>
-						</select>
-					</div>
+					</div>	
 				</div>
 				</div>
 				<div id="typefields">
 				</div>
 				<div class='col-12 '>
-					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Show Results</button>
+					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Add Item</button>
 				</div>
 			</div>
 		</fieldset>
