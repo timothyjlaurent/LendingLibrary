@@ -15,7 +15,10 @@
 	<script src="jquery.cookie.js"></script>
 	<script type="text/javascript" src="login.js"></script>
 	<script type="text/javascript" src="checkinout.js"></script>
+	<script type="text/javascript" src="navbar.js"></script>
 	<script>
+		// **** DOES THIS PAGE REQUIRE LOGIN ???? *****
+		$(document).ready(loadNavBar);
 		$(document).ready(checkLogin);
 		$(document).ready(checkMessages);
 	</script>
