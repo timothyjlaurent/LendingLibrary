@@ -16,12 +16,12 @@ function checkLogin() {
 	// If user logged in, check if session expired on server
 	// This will also unset the cookie if it is, or extend
 	// the cookie if it isn't
-	if (loginStat && loginStat === 0) {
+	if (loginStat && loginStat == 0) {
 		checkSession(userName, loginSess);
 	}
 
 	// Check session again after verifying and welcome if logged in
-	if (loginStat && loginStat === 0) {
+	if (loginStat && loginStat == 0) {
 		// Generate login message and log-out button
 		$("#formfields").append("<button type=\"button\" class='btn btn-default btn-block' id=\"x\" onclick=\"logout()\">Log out</button>");
 	}
@@ -30,11 +30,15 @@ function checkLogin() {
 
 		// Otherwise dyanmically generate CAS login form
 		// **** REMEMBMER TO CHANGE SERVICE URL to production URL  *******
-		// var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
-		var serviceURL = "https://web.engr.oregonstate.edu/~laurentt/lendingLibrary/caslogin.php";
+		var serviceURL = "https://web.engr.oregonstate.edu/~wongbe/CS419/caslogin.php";
 		var returnURL = "?return=" + window.location.href;
 		
-		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + returnURL+ "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
+		// OSU CAS Truncates long search.php parameters, so return to regular search page in that case
+		if (returnURL.indexOf("/search.php") != -1)
+			returnURL = "?return=http://web.engr.oregonstate.edu/~wongbe/CS419/search.html";
+
+		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + returnURL
+			+ "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
 
 		// Activate jquery form validate
 		$("#loginform").validate();
@@ -93,7 +97,7 @@ function createSession(data, status) {
 	$.cookie('sessExp', data.expiration, { path: '/'});
 
 	// If session expired, delete cookie and give message
-	if (data.status && data.status !== 0) {
+	if (data.status && data.status != 0) {
 		logout();
 	}
 
@@ -117,7 +121,7 @@ function checkMessages() {
 	$.cookie('userMsg', null, { path: '/'});
 	
 	// If message exists, display in message area
-	if (userMessage !== null) {
+	if (userMessage != null) {
 		$("#usermsg").empty();
 		$("#usermsg").append(userMessage);
 	}
@@ -174,7 +178,7 @@ function updateSession(data, status) {
 	$.cookie('sessExp', data.expiration, { path: '/'});
 
 	// If session expired, delete cookie and give message
-	if (data.status && data.status !== 0) {
+	if (data.status && data.status != 0) {
 		logout();
 	}
 	// Otherwise, update session expiration on server
