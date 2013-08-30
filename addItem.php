@@ -48,11 +48,11 @@
 	$query = "insert into items (`type`,`available`) values ('$type', 1)";
 	echo $query;
 	if(!($query = $mysqli->prepare($query))){
-		echo "<br>".$mysqli->error;	
+		// echo "<br>".$mysqli->error;	
 		queryError();
 	}
 	if(!($query->execute())){
-		echo "<br>".$mysqli->error;	
+		// echo "<br>".$mysqli->error;	
 		queryError();
 	}
 	$id = $mysqli->insert_id;
@@ -60,21 +60,25 @@
 
 	include 'itemTypeMaps.php';
 	print_r ($typeMap);
-	echo "<br>type $type<br>";
+	// echo "<br>type $type<br>";
 	foreach ( $schParams as $key => $val){
 		if ( $typeMap[$type][$key] != 0 || $typeMap[$type][$key] != "NULL"){
 			$query = "insert into itemDesc (`itemID`,`field`, `units`, `numValue`) values ($id,'$key','".$typeMap[$type][$key]."',$val)";
-			echo "<br>query $query<br>";
+			// echo "<br>query $query<br>";
 		} else {
 			$query = "insert into itemDesc (`itemID`,`field`, `strValue`) values ($id,'$key' ,'$val')";
-			echo "<br>query $query<br>";
+			// echo "<br>query $query<br>";
 		}
 		if(!($query = $mysqli->prepare($query))){
-			echo "<br>".$mysqli->error;	
+			// echo "<br>".$mysqli->error;	
+			queryError();
 		}
 		// echo "<br>query ".$query."<br>";
 		if(!($query->execute())){
 			queryError();
+		}
+		else {
+			echo "<h2>Item added successfully!</h2>";
 		}
 	}
 

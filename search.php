@@ -121,13 +121,14 @@
 	}
 	// print_r ($flds);
 	foreach ( $flds as $id => $atts ) { 
-		echo "<table class =\"table\"><tbody>";
+		// echo "<table class =\"table\"><tbody>";
 
 		foreach ($atts as $name => $val){
-			echo "<tr><td>" . $name . "</td><td>" . $val . "</td></tr>";
-		}
+			// echo "<tr><td>" . $name . "</td><td>" . $val . "</td></tr>";
+			echo "<div class='col-6 text-right text-muted'><strong>" . $name . "</strong></div><div class='col-6 text-left'>" . $val . "</div>";
 
-		echo "</tbody></table>";		
+		}
+	
 		echo "<div id = 'chkbutton' class='col-12 '>";
 		if ($availArr[$id] == 0 || $availArr[$id] == NULL) // Changed array reference from $available to $availArr
 			echo "<button type='submit' class='btn-block btn-large btn-default' id=\"checkout\" disabled=\"disabled\" style=\"color:black;background-color:lightgray\">Item Not Available</button>";
