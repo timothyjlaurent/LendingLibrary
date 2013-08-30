@@ -134,7 +134,7 @@
 		else if (empty($user))
 			echo "<button type='submit' class='btn-block btn-large btn-default' id=\"checkout\" disabled=\"disabled\" style=\"color:black;background-color:lightgray\">Login Before Checking Out</button>";
 		else
-			echo "<button type='submit' class='btn-block btn-large btn-default' id='checkout" . $itemID . "' value='" . $itemID . "' onclick='checkout(" . $itemID . ")'>Check Out</button>";
+			echo "<button type='submit' class='btn-block btn-large btn-default' id='checkout" . $id . "' value='" . $id . "' onclick='checkout(" . $id . ")'>Check Out</button>";
 		echo "</div>";
 	}
 
