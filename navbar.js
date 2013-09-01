@@ -14,6 +14,9 @@ loadNavBar = function(){
 				<li><a href="search.html">Search</a></li> \
 				<li><a href="addItem.html">Add Item</a></li> \
 				<li><a href="my_items.php">My Items</a></li> \
+				<li><form id="serialsearch" method="get" action="http://web.engr.oregonstate.edu/~wongbe/CS419/viewitem.php" class="form-horizontal"> \
+					<fieldset><input type="text" id="id" name="id" placeholder="IMEI/ISBN/Serial" class="required"> \
+						<button type="submit" class="btn-default" id="idbutton">Lookup</button></fieldset></form></li> \
 				<li><form id="loginform" method="get" action="https://login.oregonstate.edu/cas/login" class="form-horizontal"> \
 					<fieldset> <div id="formfields" ></div></fieldset> </li>\
 			</ul> \

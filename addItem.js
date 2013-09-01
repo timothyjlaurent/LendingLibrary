@@ -2,11 +2,29 @@
  * CS 419 Lending Project
  */
  
+ function activateAddItem() {
+ 	// Only activate Add Item button if user is logged in
+	var loginStat = $.cookie('sessStat');
+	if (loginStat && loginStat == 0) {
+		$("#addItemButton").text("Add Item");
+		$("#addItemButton").attr("style", "color:black;background-color:gray");
+		$("#addItemButton").attr("disabled", false);
+	}
+	else {
+		$("#addItemButton").text("Login to Add Item");
+		$("#addItemButton").attr("style", "color:black;background-color:lightgray");
+		$("#addItemButton").attr("disabled", true);
+	}
+ }
+ 
  
  function getAddOptions() {
 	// Activate jquery form validate
 	$("#addform").validate();
 	console.log("in getSearchOptions_ debug test");
+	
+
+	
 	// Call Ajax to retrieve list of item types
 	$.ajax({url: "itemtype.php",
 		type: "GET",

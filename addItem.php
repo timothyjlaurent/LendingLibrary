@@ -46,7 +46,7 @@
 	$ids = array();
 
 	$query = "insert into items (`type`,`available`) values ('$type', 1)";
-	echo $query;
+	// echo $query;
 	if(!($query = $mysqli->prepare($query))){
 		// echo "<br>".$mysqli->error;	
 		queryError();
@@ -56,7 +56,7 @@
 		queryError();
 	}
 	$id = $mysqli->insert_id;
-	echo $id;
+	// echo $id;
 
 	include 'itemTypeMaps.php';
 	print_r ($typeMap);
@@ -78,9 +78,10 @@
 			queryError();
 		}
 		else {
-			echo "<h2>Item added successfully!</h2>";
+			// echo "<h2>Item added successfully!</h2>";
 		}
 	}
+	echo "<h2>Item added successfully!</h2>";
 
 	function queryError() {
 		echo "Sorry there is an error, try again later <br>";

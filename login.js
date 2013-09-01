@@ -23,7 +23,7 @@ function checkLogin() {
 	// Check session again after verifying and welcome if logged in
 	if (loginStat && loginStat == 0) {
 		// Generate login message and log-out button
-		$("#formfields").append("<button type=\"button\" class='btn btn-default btn-block' id=\"x\" onclick=\"logout()\">Log out</button>");
+		$("#formfields").append("<button type=\"button\" class='btn-default' id=\"x\" onclick=\"logout()\">Log out</button>");
 	}
 
 	else {
@@ -38,7 +38,7 @@ function checkLogin() {
 			returnURL = "?return=http://web.engr.oregonstate.edu/~wongbe/CS419/search.html";
 
 		$("#formfields").append("<input type=\"hidden\" id=\"service\" name=\"service\" value=\"" + serviceURL + returnURL
-			+ "\" /><button type='submit' class='btn btn-default btn-block' id=\"x\">OSU Log In</button></div></div>");
+			+ "\" /><button type='submit' class='btn-default' id=\"x\">OSU Log In</button></div></div>");
 
 		// Activate jquery form validate
 		$("#loginform").validate();

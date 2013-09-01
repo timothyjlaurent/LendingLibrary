@@ -8,7 +8,9 @@ function checkout(item) {
 		type: "POST", // GET for testing
 		dataType: "json",
 		data: { id: item },
-		success: confirmCheckout,
+		success: function(data) {
+			confirmCheckout(data, item);
+			},
 		error: errorAjax("check out")
 		});
 }
@@ -16,15 +18,18 @@ function checkout(item) {
 /* Success callback function for checkout.
 	Updates messages and menu options.
 */
-function confirmCheckout(data) {
+function confirmCheckout(data, item) {
 
 	// Checkout is successful
 	if (data.status && data.status == 0) {
 		// turn off the button & display message
-		$("#chkbutton").empty();
-		$("#usermsg").empty();
-		$("#usermsg").append("Item checked out.  Please return by: " + data.message);
-	}
+		var buttonID = "checkout"  + item;
+
+		$("#" + buttonID).attr("disabled", true);
+		$("#" + buttonID).empty();
+		$("#" + buttonID).append("Item checked out.  Please return by: " + data.message);
+		$("#" + buttonID).attr("style", "color:black;background-color:lightgray");
+		}
 	else {
 		$("#usermsg").empty();
 		$("#usermsg").append("Unable to checkout");
@@ -41,7 +46,6 @@ function confirmCheckout(data) {
 	Needs itemID as parameter.
 */
 function checkin(itemNum) {
-
 	// Use ajax to check out item
 	$.ajax({
 		url: "checkin.php",
@@ -80,6 +84,5 @@ function confirmCheckin(data) {
 	parameter.
 */
 function errorAjax(tranType) {
-	$("#usermsg").empty();
-	$("#usermsg").append("* Unable to " + tranType);
+
 }

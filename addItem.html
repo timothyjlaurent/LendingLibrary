@@ -20,6 +20,7 @@
 		$(document).ready(loadNavBar);
 		$(document).ready(checkLogin);
 		$(document).ready(checkMessages);
+		$(document).ready(activateAddItem);
 		$(document).ready(getAddOptions);
 	</script>
 </head>
@@ -43,7 +44,7 @@
 						<label for="itemType">Item Type</label>
 					</div>
 					<div class="col-lg-10 col-sm-10 col-12">
-						<select id="typeoptions" name="typeoptions" class="form-control">
+						<select id="typeoptions" name="typeoptions" class="form-control" required>
 							<option value="">Choose</option>
 						</select>
 					</div>	
@@ -52,7 +53,7 @@
 				<div id="typefields">
 				</div>
 				<div class='col-12 '>
-					<button type='submit' class='btn-block btn-large btn-default' id=\"x\">Add Item</button>
+					<button type='submit' class='btn-block btn-large btn-default' id="addItemButton" style="color:black;background-color:lightgray" disabled >Login to Add Item </button>
 				</div>
 			</div>
 		</fieldset>
