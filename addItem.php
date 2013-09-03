@@ -59,7 +59,7 @@
 	echo $id;
 
 	include 'itemTypeMaps.php';
-	print_r ($typeMap);
+	// print_r ($typeMap);
 	// echo "<br>type $type<br>";
 	foreach ( $schParams as $key => $val){
 		if ( $typeMap[$type][$key] != 0 || $typeMap[$type][$key] != "NULL"){
@@ -77,12 +77,12 @@
 		if(!($query->execute())){
 			queryError();
 		}
-		else {
-			echo "<h2>Item added successfully!</h2>";
-		}
+		
 	}
 
+	echo "<h2>Item added successfully!</h2>";
 	function queryError() {
 		echo "<h2>Sorry there is an error, try again later</h2>";
+		exit();
 		}
 ?>
