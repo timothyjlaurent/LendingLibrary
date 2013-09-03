@@ -106,7 +106,7 @@
 		$availArr[$itemID] = $available;
 		// echo "$itemID, $field, $units, $strValue, $numValue<br>";
 		$fldDisp = preg_replace('/[-_]/', ' ', htmlspecialchars($field));
-		$value = $units == "NULL" 
+		$value = $strValue != "NULL" && $strValue != NULL
 			? htmlspecialchars($strValue) 
 			: floatval(htmlspecialchars($numValue)) . " " . htmlspecialchars($units);
 		 

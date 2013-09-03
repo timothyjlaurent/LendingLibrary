@@ -37,12 +37,12 @@
 	// # Setup variables
 	// ####################################################################
 
-	// Get itemID variable from form
+	// Get unique ID variable from form
 	if ( isset($_GET['id']) && !empty($_GET['id']) )
-		$itemID = $mysqli->real_escape_string($_GET['id']);
+		$uniqueID = $mysqli->real_escape_string($_GET['id']);
 	else
-		$itemID = "";
-	// echo "itemid: " . $itemID . "<br>";
+		$uniqueID = "";
+	// echo "itemid: " . $uniqueID . "<br>";
 	
 	// Get userID from cookie
 	
@@ -53,17 +53,17 @@
 	}
 	// echo "userid: " . $user . "<br>";
 	
-	// Validate item ID is integer before quering SQL (just digits, no "." or "-")
-	
-	if (!preg_match('/^[0-9]+$/', $itemID))
-		queryError();
+	// Validate item ID is alphanumeric before quering SQL (just digits, no "." or "-")
+
+	// if (!preg_match('/^[0-9]+$/', $uniqueID))
+		// queryError();
 
 	// ####################################################################
-	// # Query item type / availability from main table
+	// # Query item id based on unique ID (e.g. serial #) and check for availability
 	// ####################################################################
 
-	if (!($title = $mysqli->prepare("select type, available from items
-			where itemID = '$itemID'"))) {
+	if (!($title = $mysqli->prepare("select itemID, type, available from items
+			where itemID = (select distinct itemID from itemDesc where field = 'id' and strValue = '$uniqueID')"))) {
 		queryError();
 	}
 	
@@ -77,7 +77,7 @@
 		queryError();
 	// echo "Count: " . $title->num_rows . "<br>";
 	
-	if(!($title->bind_result($type, $available))) {
+	if(!($title->bind_result($itemID, $type, $available))) {
 		queryError();
 	}
 	
@@ -134,7 +134,7 @@
 	else if (empty($user))
 		echo "<button type='submit' class='btn-block btn-large btn-default' id=\"checkout\" disabled=\"disabled\" style=\"color:black;background-color:lightgray\">Login Before Checking Out</button>";
 	else
-		echo "<button type='submit' class='btn-block btn-large btn-default' id=\"checkout\" value=\"" . $itemID . "\" onclick=\"checkout(" . $itemID . ")\">Check Out</button>";
+		echo "<button type='submit' class='btn-block btn-large btn-default' id='checkout" . $itemID . "' value='" . $itemID . "' onclick='checkout(" . $itemID . ")'>Check Out</button>";
 	echo "</div>";
 
 	// ####################################################################
@@ -142,7 +142,7 @@
 	// ####################################################################
 	
 	function queryError() {
-		echo "Sorry there is an error, try again later <br>";
+		echo "No item found with that serial number / IMEI / ISBN.<br>";
 		exit;
 	}
 ?>
