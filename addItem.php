@@ -83,6 +83,6 @@
 	}
 
 	function queryError() {
-		echo "Sorry there is an error, try again later <br>";
+		echo "<h2>Sorry there is an error, try again later</h2>";
 		exit;	}
 ?>
